@@ -24,7 +24,7 @@ export default function Chat() {
 				userPhoto: photoURL,
 			});
 			txtMessageRef.current!.value = "";
-			toast.success("🎉New message posted.🎉", { position: "bottom-right", autoClose: 1000 });
+			document.querySelectorAll(".chat__body-last")[0].scrollIntoView({ behavior: "smooth" });
 		} catch (err) {
 			console.log(err);
 			toast.error(`Caught error while trying to post new message: ${err}`, { position: "bottom-right" });
@@ -51,7 +51,10 @@ export default function Chat() {
 						<Login />
 					</span>
 				</div>
-				<div className="chat__body">{messages && messages.map((msg, msgIndex) => <ChatMessage key={`message-${msgIndex}`} message={msg} />)}</div>
+				<div className="chat__body">
+					{messages && messages.map((msg, msgIndex) => <ChatMessage key={`message-${msgIndex}`} message={msg} />)}
+					<div className="chat__body-last"></div>
+				</div>
 				<div className="chat__footer">
 					<form className="messageForm" onSubmit={postNewMessage}>
 						<TextField inputRef={txtMessageRef} />

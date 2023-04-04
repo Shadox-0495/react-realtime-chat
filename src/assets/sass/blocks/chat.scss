@@ -2,8 +2,10 @@
 	max-width: 1500px;
 	margin: 0 auto;
 	min-height: 100vh;
+	max-height: 100vh;
 	padding: 0.5rem 0;
 	@include flex(column);
+	row-gap: 1rem;
 	& > * {
 		width: 100%;
 	}
@@ -27,7 +29,6 @@
 	&__body {
 		flex-grow: 1;
 		overflow-y: auto;
-		padding-top: 1rem;
 	}
 	& .messageForm {
 		@include flex(row, null, flex-start);
