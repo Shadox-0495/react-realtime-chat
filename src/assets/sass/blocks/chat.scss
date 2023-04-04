@@ -2,7 +2,7 @@
 	max-width: 1500px;
 	margin: 0 auto;
 	min-height: 100vh;
-	padding-top: 0.5rem;
+	padding: 0.5rem 0;
 	@include flex(column);
 	& > * {
 		width: 100%;
@@ -26,5 +26,62 @@
 	}
 	&__body {
 		flex-grow: 1;
+		overflow-y: auto;
+		padding-top: 1rem;
+	}
+	& .messageForm {
+		@include flex(row, null, flex-start);
+		column-gap: 1rem;
+		& .MuiTextField-root {
+			flex-grow: 1;
+		}
+		& .MuiButton-root {
+			min-width: unset;
+		}
+	}
+
+	&Message {
+		@include flex(row, null, flex-start);
+		column-gap: 1rem;
+		&:nth-of-type(n + 2) {
+			margin-top: 1rem;
+		}
+		&__text {
+			border: 1px solid #000;
+			border-radius: 0 0.5rem 0.5rem 0.5rem;
+			padding: 0.5rem 1rem;
+			position: relative;
+			&::before {
+				content: "";
+				@include abs-position(0, null, null, -1rem);
+				border-right: 0.5rem solid transparent;
+				border-left: 0.5rem solid transparent;
+				border-bottom: 0.5rem solid black;
+				transform-origin: bottom right;
+				transform: translateY(3px) rotateZ(45deg);
+			}
+		}
+		&__img {
+			border: 0.085rem solid #000;
+		}
+
+		&.user {
+			flex-direction: row-reverse;
+			& .chatMessage__text {
+				border-radius: 0.5rem 0 0.5rem 0.5rem;
+				&::before {
+					content: unset;
+				}
+				&::after {
+					content: "";
+					@include abs-position(0, -1rem, null, null);
+					border-right: 0.5rem solid transparent;
+					border-left: 0.5rem solid transparent;
+					border-bottom: 0.5rem solid black;
+					transform-origin: bottom left;
+					transform: translateY(3px) rotateZ(-45deg);
+				}
+			}
+		}
 	}
 }

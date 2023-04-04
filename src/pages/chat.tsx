@@ -1,19 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import firebase from "firebase/compat/app";
 import Login from "../assets/components/login";
 import useMemory from "../assets/features/memory";
 import { TextField, Button, Avatar } from "@mui/material";
+import { Send } from "@mui/icons-material";
 import ChatMessage from "../assets/components/chatMessage";
 
 export default function Chat() {
-	const { currentUser, fbDb } = useMemory();
+	const { currentUser, fbDb, toast } = useMemory();
 	const [messages, setMessages] = useState([]);
+	const txtMessageRef = useRef<HTMLInputElement | null>();
 	const user = currentUser.multiFactor.user;
-	fbDb.collection("messages")
-		.orderBy("createdAt")
-		.limit(25)
-		.onSnapshot((snapshot: any) => {
-			setMessages(snapshot.docs.map((doc: any) => ({ ...doc.data() })));
-		});
+
+	async function postNewMessage(Event: React.FormEvent) {
+		Event.preventDefault();
+		if (txtMessageRef.current!.value == "") return;
+		const { uid, photoURL } = user;
+		try {
+			await fbDb.collection("messages").add({
+				createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+				text: txtMessageRef.current!.value,
+				userId: uid,
+				userPhoto: photoURL,
+			});
+			txtMessageRef.current!.value = "";
+			toast.success("🎉New message posted.🎉", { position: "bottom-right", autoClose: 1000 });
+		} catch (err) {
+			console.log(err);
+			toast.error(`Caught error while trying to post new message: ${err}`, { position: "bottom-right" });
+		}
+	}
+
+	useEffect(() => {
+		fbDb.collection("messages")
+			.orderBy("createdAt")
+			.limit(25)
+			.onSnapshot((snapshot: any) => {
+				setMessages(snapshot.docs.map((doc: any) => ({ ...doc.data() })));
+			});
+	}, []);
 
 	return (
 		<>
@@ -28,9 +53,11 @@ export default function Chat() {
 				</div>
 				<div className="chat__body">{messages && messages.map((msg, msgIndex) => <ChatMessage key={`message-${msgIndex}`} message={msg} />)}</div>
 				<div className="chat__footer">
-					<form>
-						<TextField />
-						<Button> asd1 </Button>
+					<form className="messageForm" onSubmit={postNewMessage}>
+						<TextField inputRef={txtMessageRef} />
+						<Button type="submit">
+							<Send />
+						</Button>
 					</form>
 				</div>
 			</div>
