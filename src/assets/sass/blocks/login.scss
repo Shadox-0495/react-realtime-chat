@@ -1,0 +1,10 @@
+.login {
+	@include abs-position(50%, null, null, 50%);
+	@include css3-prefix(transform, translate(-50%, -50%));
+	& > div {
+		padding: 1rem !important;
+	}
+	&__providerButton {
+		text-transform: unset !important;
+	}
+}
