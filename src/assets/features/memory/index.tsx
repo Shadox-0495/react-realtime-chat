@@ -16,6 +16,10 @@ export const MemoryProvider = ({ children }: any) => {
 		return fbAuth.signInWithPopup(provider);
 	}
 
+	function fbLogout() {
+		return fbAuth.signOut();
+	}
+
 	useEffect(() => {
 		const unsubscribe = fbAuth.onAuthStateChanged((user: any) => {
 			setCurrentUser(user);
@@ -24,7 +28,7 @@ export const MemoryProvider = ({ children }: any) => {
 		return unsubscribe;
 	}, []);
 
-	const values = { appLoading, currentUser, fbAuth, fbDb, fbLoginProviders, signInWithProvider, toast };
+	const values = { appLoading, currentUser, fbAuth, fbDb, fbLoginProviders, signInWithProvider, fbLogout, toast };
 	return <MemoryContext.Provider value={values}>{!appLoading && children}</MemoryContext.Provider>;
 };
 
