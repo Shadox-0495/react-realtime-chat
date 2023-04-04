@@ -27,7 +27,7 @@ export default function Login() {
 		<>
 			<Card className="login">
 				<CardContent>
-					{currentUser ? (
+					{!currentUser ? (
 						fbLoginProviders.map((item: any, providerIndex: number) => {
 							const { text, icon, provider } = item;
 							return (
