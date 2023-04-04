@@ -26,7 +26,6 @@ export default function Chat() {
 			txtMessageRef.current!.value = "";
 			document.querySelectorAll(".chat__body-last")[0].scrollIntoView({ behavior: "smooth" });
 		} catch (err) {
-			console.log(err);
 			toast.error(`Caught error while trying to post new message: ${err}`, { position: "bottom-right" });
 		}
 	}

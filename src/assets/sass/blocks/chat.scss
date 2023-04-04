@@ -5,15 +5,22 @@
 	max-height: 100vh;
 	padding: 0.5rem 0;
 	@include flex(column);
+	background-color: var(--secondBackgroundColor);
 	row-gap: 1rem;
+	border-radius: 0.5rem;
 	& > * {
 		width: 100%;
 	}
 	&__header {
 		min-height: 40px;
+		padding: 1rem 2rem;
 		@include flex(row, space-between, center);
+		border-bottom: 0.15rem solid var(--borderColor);
 		& > span {
 			position: relative;
+			& > span {
+				font-weight: 600;
+			}
 		}
 		& .login {
 			padding: 0;
@@ -29,47 +36,64 @@
 	&__body {
 		flex-grow: 1;
 		overflow-y: auto;
+		padding: 0 1rem;
+		@include scrollbar();
+	}
+	&__footer {
+		padding: 1rem 2rem;
+		border-top: 0.15rem solid var(--borderColor);
 	}
 	& .messageForm {
 		@include flex(row, null, flex-start);
 		column-gap: 1rem;
 		& .MuiTextField-root {
 			flex-grow: 1;
+			& .MuiInputBase-root {
+				background-color: #fff;
+				border-radius: 0.5rem;
+			}
 		}
 		& .MuiButton-root {
 			min-width: unset;
+			background-color: #fff;
 		}
 	}
 
 	&Message {
 		@include flex(row, null, flex-start);
 		column-gap: 1rem;
+
 		&:nth-of-type(n + 2) {
 			margin-top: 1rem;
 		}
 		&__text {
-			border: 1px solid #000;
 			border-radius: 0 0.5rem 0.5rem 0.5rem;
 			padding: 0.5rem 1rem;
 			position: relative;
+			max-width: 75%;
+			white-space: pre-wrap;
+			word-break: break-word;
+			background-color: var(--messageBackgroundColor);
 			&::before {
 				content: "";
 				@include abs-position(0, null, null, -1rem);
 				border-right: 0.5rem solid transparent;
 				border-left: 0.5rem solid transparent;
-				border-bottom: 0.5rem solid black;
+				border-bottom: 0.5rem solid var(--messageBackgroundColor);
 				transform-origin: bottom right;
 				transform: translateY(3px) rotateZ(45deg);
 			}
 		}
 		&__img {
 			border: 0.085rem solid #000;
+			background-color: #d7d7d7;
 		}
 
 		&.user {
 			flex-direction: row-reverse;
 			& .chatMessage__text {
 				border-radius: 0.5rem 0 0.5rem 0.5rem;
+				background-color: var(--userMessageBackgroundColor);
 				&::before {
 					content: unset;
 				}
@@ -78,7 +102,7 @@
 					@include abs-position(0, -1rem, null, null);
 					border-right: 0.5rem solid transparent;
 					border-left: 0.5rem solid transparent;
-					border-bottom: 0.5rem solid black;
+					border-bottom: 0.5rem solid var(--userMessageBackgroundColor);
 					transform-origin: bottom left;
 					transform: translateY(3px) rotateZ(-45deg);
 				}

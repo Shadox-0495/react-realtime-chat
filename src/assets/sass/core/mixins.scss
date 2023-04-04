@@ -81,12 +81,12 @@
 	/*scrollbar-color: var(--scroll-bar-thumb) var(--scroll-bar-track);*/
 
 	@if ($thumbColor) {
-		--scrollBarThumb: $thumbColor;
+		--scrollbarThumbColor: $thumbColor;
 	}
 
 	&::-webkit-scrollbar {
-		width: var(--scrollBarWidth);
-		height: var(--scrollBarWidth);
+		width: var(--scrollbarWidth);
+		height: var(--scrollbarWidth);
 		border-radius: 0px;
 		box-shadow: none;
 	}
@@ -96,14 +96,14 @@
 	}
 
 	&::-webkit-scrollbar-track {
-		background: var(--scrollBarTrack);
-		border-radius: 0;
+		background: var(--scrollbarTrackColor);
+		border-radius: var(--scrollbarTrackBorderRadious);
 		box-shadow: none;
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background-color: var(--scrollBarThumb);
-		border-radius: 8px;
+		background-color: var(--scrollbarThumbColor);
+		border-radius: var(--scrollbarThumbBorderRadious);
 		box-shadow: none;
 	}
 

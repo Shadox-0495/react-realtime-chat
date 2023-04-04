@@ -1,3 +1,15 @@
 :root {
-	--fontFamily: "Arial";
+	--fontFamily: "Calibre", "Inter", "San Francisco", "SF Pro Text", -apple-system, system-ui, sans-serif;
+	--mainBackgroundColor: #282c41;
+	--secondBackgroundColor: #c1dbfa;
+	--borderColor: #576cbc;
+	--messageBackgroundColor: #7da4e8;
+	--userMessageBackgroundColor: #719fef;
+	--mainTextColor: #000;
+
+	--scrollbarWidth: 10px;
+	--scrollbarThumbColor: #3259f4;
+	--scrollbarThumbBorderRadious: 0.25rem;
+	--scrollbarTrackColor: #fff;
+	--scrollbarTrackBorderRadious: 0.25rem;
 }
