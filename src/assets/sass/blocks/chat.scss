@@ -1,0 +1,30 @@
+.chat {
+	max-width: 1500px;
+	margin: 0 auto;
+	min-height: 100vh;
+	padding-top: 0.5rem;
+	@include flex(column);
+	& > * {
+		width: 100%;
+	}
+	&__header {
+		min-height: 40px;
+		@include flex(row, space-between, center);
+		& > span {
+			position: relative;
+		}
+		& .login {
+			padding: 0;
+			position: static;
+			top: unset;
+			left: unset;
+			transform: unset;
+			& > div {
+				padding: 0 !important;
+			}
+		}
+	}
+	&__body {
+		flex-grow: 1;
+	}
+}
