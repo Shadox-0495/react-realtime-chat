@@ -25,8 +25,9 @@ npm run build
 ## Features
 
 -   Login with google account using Firebase.
+-   Show the user's image from the google account.
 -   Send/receive messages from the users in the chat room.
--   Message saving using Firebase's firestore.
+-   Store all messages in the Firebase's firestore.
     <br >
     <br >
 
